@@ -1,0 +1,35 @@
+.header {
+  max-height: 500px;
+  min-height: 380px;
+  background-color: rgb(59, 59, 59);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.header__wrapper {
+  text-align: left;
+  max-width: 650px;
+}
+
+.header__author {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  color: rgb(177, 177, 177);
+}
+
+.header__author_url {
+  text-decoration: none;
+  color: rgb(177, 177, 177);
+}
+
+.header__author_url:hover {
+  color: white;
+}

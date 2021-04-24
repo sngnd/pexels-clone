@@ -1,0 +1,153 @@
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loader__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.loader div {
+  position: absolute;
+  top: 0px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: black;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.loader div:nth-child(1) {
+  left: 8px;
+  animation: loader1 0.6s infinite;
+}
+.loader div:nth-child(2) {
+  left: 8px;
+  animation: loader2 0.6s infinite;
+}
+.loader div:nth-child(3) {
+  left: 32px;
+  animation: loader2 0.6s infinite;
+}
+.loader div:nth-child(4) {
+  left: 56px;
+  animation: loader3 0.6s infinite;
+}
+
+@keyframes loader1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes loader3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes loader2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.container {
+  margin-top: 86px;
+  text-align: center;
+}
+
+.photos__back {
+  border: 0;
+  padding: 0.7rem;
+  background-color: #04a484;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+}
+
+.photos {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.photos__wrapper {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 3rem;
+  grid-row-gap: 2rem;
+}
+
+/* //wrwf */
+.card {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 6;
+}
+
+.card:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  transition: 0.5s ease;
+  background: linear-gradient(
+    0deg,
+    rgb(0, 0, 0, 0.6) 20%,
+    rgba(255, 255, 255, 0) 75%
+  );
+}
+
+.card__photographer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: rgb(221, 221, 221);
+  display: none;
+  text-decoration: none;
+  /* z-index: 5; */
+}
+
+.card__photographer:hover {
+  color: white;
+}
+
+.card__more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+
+.card:hover .card__photographer,
+.card:hover .card__more {
+  display: block;
+  pointer-events: all;
+}
+
+.card__more_like {
+  color: rgb(190, 190, 190);
+  font-size: 1.5rem;
+  transition: all 0.1s ease-out;
+  background-color: transparent;
+  border: none;
+}
+
+.active {
+  color: red;
+}

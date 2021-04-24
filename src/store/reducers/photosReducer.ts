@@ -1,0 +1,30 @@
+import { Photo } from "pexels";
+import { PhotosState, PhotosAction } from "../types";
+import { Constants } from "../constants";
+
+const initialState: PhotosState = {
+  data: null,
+  loading: false,
+  error: "",
+};
+
+const photosReducer = (
+  state = initialState,
+  action: PhotosAction
+): PhotosState => {
+  switch (action.type) {
+    case Constants.GET_PHOTOS:
+      return { ...state, loading: true, error: "" };
+
+    case Constants.GET_PHOTOS_SUCCESS:
+      return { ...state, data: action.payload, loading: false, error: "" };
+
+    case Constants.GET_PHOTOS_ERROR:
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export default photosReducer;
