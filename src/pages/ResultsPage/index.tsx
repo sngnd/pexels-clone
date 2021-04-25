@@ -1,5 +1,18 @@
 import PhotosGrid from "../../containers/PhotosGrid";
+import { NavBar } from "../../components";
+import { FC } from "react";
 
-const ResultsPage = () => <PhotosGrid isHomePage={false} />;
+interface ResultPageProps {
+  onSearch: (query: string) => void;
+}
+
+const ResultsPage: FC<ResultPageProps> = ({ onSearch }) => {
+  return (
+    <>
+      <NavBar onSearch={onSearch} />
+      <PhotosGrid isHomePage={false} />
+    </>
+  );
+};
 
 export default ResultsPage;

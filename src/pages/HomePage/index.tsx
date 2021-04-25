@@ -1,16 +1,15 @@
 import { FC, useEffect } from "react";
-import { Header } from "../../components";
+import { Header, NavBar } from "../../components";
 import PhotosGrid from "../../containers/PhotosGrid";
 import { useDispatch } from "react-redux";
 import { fetchCuratedPhotos } from "../../store/actions/photosActions";
 
-const Home: FC = () => {
-  const dispatch = useDispatch();
-  const searchPhotosHandler = (query: string) => {
-    //   dispatch(getPhotos(1, query));
-  };
+interface HomeProps {
+  onSearch: (query: string) => void;
+}
 
-  
+const Home: FC<HomeProps> = ({ onSearch }) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchCuratedPhotos(dispatch, 1);
@@ -18,7 +17,8 @@ const Home: FC = () => {
 
   return (
     <div>
-      <Header />
+      <NavBar onSearch={onSearch} />
+      <Header onSearch={onSearch} />
       <PhotosGrid isHomePage={true} />
     </div>
   );

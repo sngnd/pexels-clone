@@ -1,8 +1,10 @@
+import { ModalAction, ModalProperties } from "./../types";
 import { Constants } from "./../constants";
 
-export function showModal(): ModalAct ion {
+export function showModal(payload: ModalProperties): ModalAction {
   return {
     type: Constants.SHOW_MODAL,
+    payload,
   };
 }
 

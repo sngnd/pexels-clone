@@ -3,11 +3,10 @@ import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 interface SearchProps {
-  isActive?: boolean;
   onSearch: (query: string) => void;
 }
 
-const SearchForm: FC<SearchProps> = ({ isActive, onSearch }) => {
+const SearchForm: FC<SearchProps> = ({ onSearch }) => {
   const [search, setSearch] = useState("");
   const history = useHistory();
 

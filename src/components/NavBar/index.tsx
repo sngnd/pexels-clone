@@ -4,8 +4,11 @@ import { SearchForm } from "../index";
 import { FC, useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
-const NavBar: FC = () => {
-  const onSearchHandler = (): void => {};
+interface NavBarProps {
+  onSearch: (query: string) => void;
+}
+
+const NavBar: FC<NavBarProps> = ({ onSearch }) => {
   const location = useLocation();
 
   const [isActive, setIsActive] = useState(false);
@@ -33,11 +36,7 @@ const NavBar: FC = () => {
         <img src={logo} className={styles.nav__logo_img} alt="logo" />
         <p className={styles.nav__logo_text}>Pexels</p>
       </a>
-      {isActive ? (
-        <SearchForm onSearch={onSearchHandler} isActive={true} />
-      ) : (
-        ""
-      )}
+      {isActive ? <SearchForm onSearch={onSearch} /> : ""}
     </nav>
   );
 };

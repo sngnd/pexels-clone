@@ -2,17 +2,15 @@ import styles from "./Header.module.css";
 import { SearchForm } from "../";
 import { useState, FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPhotos } from "../../store/actions/photosActions";
 import { fetchBackground } from "../../store/actions/backgroundActions";
 import { RootState } from "../../store/reducers/rootReducer";
-
-const PER_PAGE_10 = 10;
+import { SUGGESTIONS } from "../../suggestions";
 
 interface HeaderProps {
-  onSearchHandler: (query: string) => void;
+  onSearch: (query: string) => void;
 }
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({ onSearch }) => {
   const background = useSelector((state: RootState) => state.background);
 
   const [bgUrl, setBgUrl] = useState("");
@@ -34,17 +32,35 @@ const Header: FC = () => {
   }, [background.data]);
 
   const getRandomPhoto = () => {
-    const randomPage = getRandomPageNumber();
+    const randomPage = getRandomNumber(20, 1);
     fetchBackground(dispatch, randomPage);
   };
 
-  const getRandomPageNumber = (): number => {
-    return Math.floor(Math.random() * 20) + 1;
+  const getRandomNumber = (max: number, min: number): number => {
+    let arr: Array<number> = [];
+    for (let i = min; i <= max; i++) {
+      arr.push(i);
+    }
+    return Math.floor(Math.random() * max) + min;
   };
 
-  const onSearch = (query: string) => {
-    setPage((prev) => prev + 1);
-    fetchPhotos(dispatch, query, page, PER_PAGE_10);
+  const showSuggestions = () => {
+    let array: Array<string> = [];
+    for (let i = 0; i < 7; i++) {
+      array.push(SUGGESTIONS[getRandomNumber(39, 0)]);
+    }
+    return array.map((item) => (
+      <button
+        className={styles.suggestion}
+        onClick={(e) => {
+          e.preventDefault();
+          onSearch(item);
+        }}
+        key={item + new Date().getTime()}
+      >
+        {item}
+      </button>
+    ));
   };
 
   return (
@@ -58,10 +74,14 @@ const Header: FC = () => {
             The best free stock photos videos shared by talented creators.
           </h1>
           <SearchForm onSearch={onSearch} />
+          <div className={styles.header__suggestions}>
+            <strong>Suggested: </strong>
+            {showSuggestions()}
+          </div>
         </div>
         {background.loading === false ? (
           <span className={styles.header__author}>
-            Photo by{" "}
+            Photo by {""}
             <a
               href={bgAuthorUrl}
               target="_blank"

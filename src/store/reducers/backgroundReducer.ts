@@ -1,4 +1,3 @@
-import { Photo } from "pexels";
 import { PhotosState, BackgroundAction } from "../types";
 import { Constants } from "../constants";
 

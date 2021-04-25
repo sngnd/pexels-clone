@@ -1,12 +1,13 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import "./App.css";
 import { NavBar } from "./components/";
+import { Modal } from "./components/";
 import Routes from "./routes";
 
 const App: FC = () => {
   return (
     <div>
-      <NavBar />
+      <Modal />
       <Routes />
     </div>
   );

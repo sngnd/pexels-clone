@@ -33,3 +33,13 @@
 .header__author_url:hover {
   color: white;
 }
+
+.header__suggestions {
+  margin-top: 5px;
+}
+
+.suggestion {
+  background-color: transparent;
+  border: none;
+  color: white;
+}

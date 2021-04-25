@@ -8,11 +8,11 @@ export interface PhotosData {
   photos: Photo[];
 }
 
-export interface PhotosState {
+export type PhotosState = {
   data: PhotosData | null;
   loading: boolean;
   error: string;
-}
+};
 
 interface GetPhotosSuccessAction {
   type: Constants.GET_PHOTOS_SUCCESS;
@@ -56,12 +56,32 @@ export type BackgroundAction =
 // Modal types
 interface ShowModalAction {
   type: Constants.SHOW_MODAL;
-  payload?: any;
+  payload: ModalProperties;
 }
 
 interface HideModalAction {
-  type: Constants.SHOW_MODAL;
+  type: Constants.HIDE_MODAL;
   payload?: any;
 }
+
+export interface ModalProperties {
+  imageSrc: Photo["src"];
+  imageId: number;
+}
+
+// interface ImageSrc {
+//   original: string;
+//   large2x: string;
+//   large: string;
+//   medium: string;
+//   small: string;
+//   portrait: string;
+//   landscape: string;
+//   tiny: string;
+// }
+
+export type ModalState = {
+  modal: ModalProperties | null;
+};
 
 export type ModalAction = ShowModalAction | HideModalAction;
