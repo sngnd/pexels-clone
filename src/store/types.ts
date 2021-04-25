@@ -69,19 +69,28 @@ export interface ModalProperties {
   imageId: number;
 }
 
-// interface ImageSrc {
-//   original: string;
-//   large2x: string;
-//   large: string;
-//   medium: string;
-//   small: string;
-//   portrait: string;
-//   landscape: string;
-//   tiny: string;
-// }
-
 export type ModalState = {
   modal: ModalProperties | null;
 };
 
 export type ModalAction = ShowModalAction | HideModalAction;
+
+// suggestions types
+export interface SuggestionsAction {
+  type: Constants.GET_SUGGESTIONS;
+  payload: SuggestionsType;
+}
+
+export type SuggestionsType = {
+  suggestions: string;
+};
+
+// like
+
+export interface PageAction {
+  type: Constants.NEXT_PAGE;
+}
+
+export type PageType = {
+  page: number;
+};

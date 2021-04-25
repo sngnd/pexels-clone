@@ -22,7 +22,7 @@ const NavBar: FC<NavBarProps> = ({ onSearch }) => {
     return () => {
       window.removeEventListener("scroll", changeBackground);
     };
-  });
+  }, [location.pathname]);
 
   const changeBackground = () => {
     if (window.scrollY >= 66) {

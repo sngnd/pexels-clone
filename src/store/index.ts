@@ -1,5 +1,5 @@
 import { rootReducer } from "./reducers/rootReducer";
-import { createStore } from "redux";
+import { compose, createStore } from "redux";
 
 // const saveToLocalStorage = (store: any) => {
 //   try {
@@ -27,6 +27,13 @@ import { createStore } from "redux";
 
 // store.subscribe(() => saveToLocalStorage(store.getState()));
 
-const store = createStore(rootReducer);
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancers());
 
 export default store;

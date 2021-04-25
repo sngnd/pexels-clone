@@ -3,7 +3,7 @@ import { Constants } from "../constants";
 import { PhotosAction } from "../types";
 import { client } from "../../api/";
 import { PhotosWithTotalResults, Photos, ErrorResponse } from "pexels";
-const PER_PAGE = 10;
+const PER_PAGE = 6;
 
 const getPhotos = (): PhotosAction => ({
   type: Constants.GET_PHOTOS,
@@ -19,22 +19,16 @@ const getPhotosError = (payload: string): PhotosAction => ({
   payload,
 });
 
-const fetchPhotos = async (
-  dispatch: any,
-  query: string,
-  page: number,
-  per_page: number
-) => {
+const fetchPhotos = async (dispatch: any, query: string, page: number) => {
   dispatch(getPhotos());
   try {
     const photos:
       | PhotosWithTotalResults
       | ErrorResponse = await client.photos.search({
       query: query,
-      per_page: per_page,
+      per_page: PER_PAGE,
       page: page,
     });
-    console.log(photos);
     if ("error" in photos) {
       throw new Error(photos.error);
     } else {

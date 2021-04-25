@@ -23,19 +23,18 @@ const getBackgroundError = (payload: string): BackgroundAction => ({
   payload,
 });
 
-const fetchBackground = async (dispatch: any, page: number) => {
+const fetchBackground = async (dispatch: any) => {
   dispatch(getBackground());
   try {
     const photo:
       | PhotosWithTotalResults
       | ErrorResponse = await client.photos.search({
       per_page: PER_PAGE_1,
-      page: page,
+      page: getRandomNumber(),
       color: COLOR,
       query: QUERY,
       orientation: ORIENTATION,
     });
-    console.log("back" + photo);
     if ("error" in photo) {
       throw new Error(photo.error);
     } else {
@@ -44,6 +43,10 @@ const fetchBackground = async (dispatch: any, page: number) => {
   } catch (error) {
     dispatch(getBackgroundError(error));
   }
+};
+
+const getRandomNumber = (): number => {
+  return Math.floor(Math.random() * 20) + 1;
 };
 
 export { fetchBackground };

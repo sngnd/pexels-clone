@@ -25,4 +25,4 @@ const modalReducer = (
   }
 };
 
-export default modalReducer;
+export { modalReducer };

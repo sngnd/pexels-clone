@@ -1,4 +1,4 @@
-import PhotosGrid from "../../containers/PhotosGrid";
+import PhotosGrid from "../../components/PhotosGrid";
 import { NavBar } from "../../components";
 import { FC } from "react";
 

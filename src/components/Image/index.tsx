@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import styles from "./Image.module.css";
 import { Photo } from "pexels";
 import { useDispatch } from "react-redux";
@@ -35,16 +35,17 @@ const Image: FC<ImageProps> = ({ image }) => {
       onClick={(e) => onImageClickHandler(e, image)}
     >
       <img
-        src={image.src.large}
+        src={image.src.portrait}
         className={styles.card__image}
         width="100%"
+        alt=""
       ></img>
-      <a
+      <span
         className={styles.card__photographer}
         onClick={() => window.open(`${image.photographer_url}`, "_blank")}
       >
         {image.photographer}
-      </a>
+      </span>
       <div className={styles.card__more}>
         <LikeButton id={image.id} />
       </div>

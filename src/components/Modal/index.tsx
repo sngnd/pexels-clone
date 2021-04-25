@@ -41,7 +41,7 @@ const Modal: FC = () => {
           <div className={styles.modal__imageWrapper}>
             <img
               src={modal.imageSrc.large}
-              alt="image"
+              alt=""
               className={styles.modal__image}
             />
           </div>

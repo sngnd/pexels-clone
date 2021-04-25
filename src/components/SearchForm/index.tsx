@@ -12,9 +12,11 @@ const SearchForm: FC<SearchProps> = ({ onSearch }) => {
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    onSearch(search);
-    setSearch("");
-    history.push(`/search/${search}`);
+    if (!!search) {
+      onSearch(search);
+      setSearch("");
+      history.push(`/search/${search}`);
+    }
   };
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

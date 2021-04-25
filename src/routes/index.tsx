@@ -10,7 +10,7 @@ const Routes = () => {
 
   const onSearch = (query: string) => {
     history.push(`/search/${query}`);
-    fetchPhotos(dispatch, query, 1, 10);
+    // fetchPhotos(dispatch, query, 1, 10);
   };
 
   return (

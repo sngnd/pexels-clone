@@ -26,4 +26,4 @@ const backgroundReducer = (
   }
 };
 
-export default backgroundReducer;
+export { backgroundReducer };

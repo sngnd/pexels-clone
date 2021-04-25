@@ -1,12 +1,18 @@
 import { combineReducers } from "redux";
-import photosReducer from "./photosReducer";
-import backgroundReducer from "./backgroundReducer";
-import modalReducer from "./modalReducer";
+import {
+  photosReducer,
+  backgroundReducer,
+  modalReducer,
+  suggestionsReducer,
+  pageReducer,
+} from "./";
 
 export const rootReducer = combineReducers({
   photos: photosReducer,
   background: backgroundReducer,
   modal: modalReducer,
+  suggestions: suggestionsReducer,
+  page: pageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

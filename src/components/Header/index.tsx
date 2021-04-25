@@ -1,55 +1,29 @@
 import styles from "./Header.module.css";
 import { SearchForm } from "../";
 import { useState, FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchBackground } from "../../store/actions/backgroundActions";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
-import { SUGGESTIONS } from "../../suggestions";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
 }
 
 const Header: FC<HeaderProps> = ({ onSearch }) => {
-  const background = useSelector((state: RootState) => state.background);
+  const { data } = useSelector((state: RootState) => state.background);
+  const { suggestions } = useSelector((state: RootState) => state.suggestions);
 
   const [bgUrl, setBgUrl] = useState("");
   const [bgAuthorUrl, setBgAuthorUrl] = useState("");
-  const [bgAuthor, setBgAuthor] = useState("");
-  const [page, setPage] = useState(1);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    getRandomPhoto();
-  }, []);
-
-  useEffect(() => {
-    const photo = background.data?.photos[0];
+    const photo = data?.photos[0];
     setBgUrl(`${photo?.src.original}`);
     setBgAuthorUrl(`${photo?.photographer_url}`);
-    setBgAuthor(`${photo?.photographer}`);
-  }, [background.data]);
-
-  const getRandomPhoto = () => {
-    const randomPage = getRandomNumber(20, 1);
-    fetchBackground(dispatch, randomPage);
-  };
-
-  const getRandomNumber = (max: number, min: number): number => {
-    let arr: Array<number> = [];
-    for (let i = min; i <= max; i++) {
-      arr.push(i);
-    }
-    return Math.floor(Math.random() * max) + min;
-  };
+  }, [data?.photos]);
 
   const showSuggestions = () => {
-    let array: Array<string> = [];
-    for (let i = 0; i < 7; i++) {
-      array.push(SUGGESTIONS[getRandomNumber(39, 0)]);
-    }
-    return array.map((item) => (
+    let result = suggestions.split(",");
+    return result.map((item) => (
       <button
         className={styles.suggestion}
         onClick={(e) => {
@@ -79,20 +53,17 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
             {showSuggestions()}
           </div>
         </div>
-        {background.loading === false ? (
-          <span className={styles.header__author}>
-            Photo by {""}
-            <a
-              href={bgAuthorUrl}
-              target="_blank"
-              className={styles.header__author_url}
-            >
-              {bgAuthor}
-            </a>
-          </span>
-        ) : (
-          ""
-        )}
+        <span className={styles.header__author}>
+          Photo by {""}
+          <a
+            href={bgAuthorUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.header__author_url}
+          >
+            {data?.photos[0].photographer}
+          </a>
+        </span>
       </header>
     </>
   );
