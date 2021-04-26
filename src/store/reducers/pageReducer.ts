@@ -2,7 +2,7 @@ import { PageAction, PageType } from "../types";
 import { Constants } from "../constants";
 
 const initialState = {
-  page: 0,
+  page: 1,
 };
 
 const pageReducer = (state = initialState, action: PageAction): PageType => {

@@ -17,6 +17,7 @@ interface PhotosProps {
 const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
   const dispatch = useDispatch();
   const { page } = useSelector((state: RootState) => state.page);
+  const [query, setQuery] = useState("");
 
   const { data, loading, error } = useSelector(
     (state: RootState) => state.photos
@@ -24,7 +25,7 @@ const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
 
   useEffect(() => {
     dispatch(clearPages());
-  }, []);
+  }, [window.location.pathname]);
 
   useEffect(() => {
     if (!isHomePage) {
