@@ -31,7 +31,7 @@ const Image: FC<ImageProps> = ({ image }) => {
   return (
     <div
       className={styles.card}
-      style={{ backgroundColor: `${image.avg_color}` }}
+      // style={{ backgroundColor: `${image.avg_color}` }}
       onClick={(e) => onImageClickHandler(e, image)}
     >
       <img
