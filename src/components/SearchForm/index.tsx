@@ -1,6 +1,5 @@
 import styles from "./SearchForm.module.css";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -8,14 +7,12 @@ interface SearchProps {
 
 const SearchForm: FC<SearchProps> = ({ onSearch }) => {
   const [search, setSearch] = useState("");
-  const history = useHistory();
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
     if (!!search) {
       onSearch(search);
       setSearch("");
-      history.push(`/search/${search}`);
     }
   };
 

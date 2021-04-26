@@ -9,4 +9,5 @@ export enum Constants {
   HIDE_MODAL = "HIDE_MODAL",
   GET_SUGGESTIONS = "GET_SUGGESTIONS",
   NEXT_PAGE = "NEXT_PAGE",
+  CLEAR = "CLEAR",
 }

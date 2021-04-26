@@ -1,8 +1,7 @@
 import { FC, useEffect } from "react";
 import { Header, NavBar } from "../../components";
 import PhotosGrid from "../../components/PhotosGrid";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCuratedPhotos } from "../../store/actions/photosActions";
+import { useDispatch } from "react-redux";
 import { fetchBackground } from "../../store/actions/backgroundActions";
 import { getSuggestions } from "../../store/actions/suggestionsActions";
 import { SUGGESTIONS } from "../../suggestions";
@@ -19,7 +18,7 @@ const Home: FC<HomeProps> = ({ onSearch }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchCuratedPhotos(dispatch, 1);
+    // fetchCuratedPhotos(dispatch, 1);
     fetchBackground(dispatch);
     setSuggestions();
   }, []);

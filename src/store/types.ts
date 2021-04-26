@@ -87,10 +87,16 @@ export type SuggestionsType = {
 
 // like
 
-export interface PageAction {
+interface nextPageAction {
   type: Constants.NEXT_PAGE;
 }
 
 export type PageType = {
   page: number;
 };
+
+interface clearPagesAction {
+  type: Constants.CLEAR;
+}
+
+export type PageAction = nextPageAction | clearPagesAction;

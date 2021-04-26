@@ -2,7 +2,7 @@
   display: inline-block;
   position: relative;
   width: 80px;
-  height: 80px;
+  height: 40px;
 }
 
 .loader__wrapper {
@@ -154,4 +154,5 @@
 
 .bottom {
   grid-column: 1/3;
+  margin-top: 30px;
 }

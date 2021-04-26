@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
 import styles from "./PhotosGrid.module.css";
@@ -8,7 +8,7 @@ import {
   fetchCuratedPhotos,
   fetchPhotos,
 } from "../../store/actions/photosActions";
-import { getToNextPage } from "../../store/actions/pageAction";
+import { clearPages, getToNextPage } from "../../store/actions/pageAction";
 
 interface PhotosProps {
   isHomePage: boolean;
@@ -23,6 +23,10 @@ const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
   );
 
   useEffect(() => {
+    dispatch(clearPages());
+  }, []);
+
+  useEffect(() => {
     if (!isHomePage) {
       const query = window.location.pathname.substring(8);
       fetchPhotos(dispatch, query, page);
@@ -32,7 +36,6 @@ const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
   }, [page]);
 
   const showPhotos = (): JSX.Element[] | undefined => {
-    console.log(data?.photos);
     return data?.photos.map((image) => <Image image={image} key={image.id} />);
   };
 
@@ -67,7 +70,22 @@ const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
         </Link>
       )}
       <div className={styles.photos}>
-        {/* {loading ? (
+        {error ? (
+          <div className={styles.photos__error}>{error}</div>
+        ) : data?.total_results !== 0 ? (
+          <>
+            <div className={styles.photos__wrapper}>{showPhotos()}</div>
+          </>
+        ) : (
+          <div className={styles.photos__noResult}>No results</div>
+        )}
+      </div>
+      <div
+        style={{ border: "1px solid transparent" }}
+        ref={bottomBoundaryRef}
+        className={styles.bottom}
+      >
+        {loading && (
           <div className={styles.loader__wrapper}>
             <div className={styles.loader}>
               <div></div>
@@ -76,21 +94,8 @@ const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
               <div></div>
             </div>
           </div>
-        ) : error ? (
-          <div className={styles.photos__error}>{error}</div>
-        ) : data?.total_results !== 0 ? (
-          <> */}
-        <div className={styles.photos__wrapper}>{showPhotos()}</div>
-        {/* </>
-        ) : (
-          <div className={styles.photos__noResult}>No results</div>
-        )} */}
+        )}
       </div>
-      <div
-        style={{ border: "1px solid red" }}
-        ref={bottomBoundaryRef}
-        className={styles.bottom}
-      ></div>
     </section>
   );
 };
