@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/reducers/rootReducer";
 import styles from "./PhotosGrid.module.css";
@@ -17,7 +17,6 @@ interface PhotosProps {
 const PhotosGrid: FC<PhotosProps> = ({ isHomePage }) => {
   const dispatch = useDispatch();
   const { page } = useSelector((state: RootState) => state.page);
-  const [query, setQuery] = useState("");
 
   const { data, loading, error } = useSelector(
     (state: RootState) => state.photos

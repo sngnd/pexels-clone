@@ -18,7 +18,6 @@ const Home: FC<HomeProps> = ({ onSearch }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // fetchCuratedPhotos(dispatch, 1);
     fetchBackground(dispatch);
     setSuggestions();
   }, []);
